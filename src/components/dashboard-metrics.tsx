@@ -1,11 +1,10 @@
 import { AiOutlineLike } from "react-icons/ai"
 import { BsFillPauseBtnFill, BsStopwatch } from "react-icons/bs"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
-import { RxDoubleArrowRight, RxDoubleArrowUp } from "react-icons/rx"
+import { RxDoubleArrowDown, RxDoubleArrowRight } from "react-icons/rx"
 import { TbMailPause } from "react-icons/tb"
 import { VscOutput } from "react-icons/vsc"
 import StatusCard from "./status-card"
-import { Bar, Line, Pie } from "react-chartjs-2"
 import { ComplaintsByStatusChart, ComplaintsByTypeChart, TotalComplaintsChart } from "./line-chart"
 import RecentComplaints from "./recent-complaints"
 
@@ -15,7 +14,7 @@ const statusConfig = [
       count: 0,
       icon: <VscOutput size={35} />,
       color: "[#FF5733]",
-      arrow: <RxDoubleArrowUp />,
+      arrow: <RxDoubleArrowDown />,
       description: "Fresh issues"
     },
     {

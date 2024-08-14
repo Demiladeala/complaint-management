@@ -3,7 +3,7 @@ import Home from "./pages/home"
 import Login from "./pages/login"
 import Signup from "./pages/signup"
 import Dashboard from "./pages/dashboard"
-import History from "./pages/complaint-history"
+import History from "./pages/history"
 
 function App() {
   return (
