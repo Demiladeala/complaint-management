@@ -23,7 +23,7 @@ const StatusCard = ({ title, count, icon, color, arrow, description, isLast }: P
             <h2 className="mt-1 text-2xl md:text-4xl 2xl:text-5xl font-bold">{count}</h2>
           </div>
   
-          <div className={`mt-2 text-${color} flex items-center gap-2`}>
+          <div className={`mt-2 ${color} flex items-center gap-2`}>
             {arrow}
             <p className="text-xs">{description}</p>
           </div>

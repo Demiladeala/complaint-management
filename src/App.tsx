@@ -4,6 +4,8 @@ import Login from "./pages/login"
 import Signup from "./pages/signup"
 import Dashboard from "./pages/dashboard"
 import History from "./pages/history"
+import Complaint from "./pages/complaint"
+import Settings from "./pages/settings"
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/complaint" element={<Complaint />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/history" element={<History />} />
       </Routes>
    </main>

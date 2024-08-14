@@ -13,7 +13,7 @@ const statusConfig = [
       title: "New",
       count: 0,
       icon: <VscOutput size={35} />,
-      color: "[#FF5733]",
+      color: "text-[#FF5733]",
       arrow: <RxDoubleArrowDown />,
       description: "Fresh issues"
     },
@@ -21,7 +21,7 @@ const statusConfig = [
       title: "Pending",
       count: 0,
       icon: <BsStopwatch size={30} />,
-      color: "yellow-500",
+      color: "text-yellow-500",
       arrow: <RxDoubleArrowRight />,
       description: "In progress"
     },
@@ -29,7 +29,7 @@ const statusConfig = [
       title: "Resolved",
       count: 0,
       icon: <AiOutlineLike size={35} />,
-      color: "[#28A745]",
+      color: "text-[#28A745]",
       arrow: <IoMdCheckmarkCircleOutline />,
       description: "Issues closed"
     },
@@ -37,7 +37,7 @@ const statusConfig = [
       title: "Paused",
       count: 0,
       icon: <TbMailPause size={35} />,
-      color: "primary-gray",
+      color: "text-primary-gray",
       arrow: <BsFillPauseBtnFill />,
       description: "On hold"
     }
