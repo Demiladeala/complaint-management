@@ -11,12 +11,12 @@ export const TotalComplaintsChart: React.FC<{ data: any[] }> = ({ data }) => (
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="complaints" stroke="#02ADE2" activeDot={{ r: 8 }} />
+      <Line type="monotone" dataKey="complaints" stroke="#1479A7" activeDot={{ r: 8 }} />
     </LineChart>
   </ResponsiveContainer>
 );
 
-const COLORS = ['#FF5733', '#eab308', '#02ADE2', '#F0E', '#F0F'];
+const COLORS = ['#254364', '#5791C4', '#A1C3E1', '#F0E', '#F0F'];
 
 export const ComplaintsByTypeChart: React.FC<{ data: any[] }> = ({ data }) => (
   <ResponsiveContainer width="100%" height={300}>
@@ -30,7 +30,7 @@ export const ComplaintsByTypeChart: React.FC<{ data: any[] }> = ({ data }) => (
         label
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
         ))}
       </Pie>
       <Tooltip />
@@ -47,7 +47,7 @@ export const ComplaintsByStatusChart: React.FC<{ data: any[] }> = ({ data }) => 
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="count" fill="#02ADE2" />
+      <Bar dataKey="count" fill="#254364" />
     </BarChart>
   </ResponsiveContainer>
 );

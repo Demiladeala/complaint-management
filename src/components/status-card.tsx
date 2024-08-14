@@ -11,7 +11,7 @@ type Props = {
 }
 
 const StatusCard = ({ title, count, icon, color, arrow, description, isLast }: Props) => (
-    <div className={` flex items-center gap-3 ${!isLast ? 'border-b md:border-b-0 lg:border-r' : ''} pb-5" `}>
+    <div className={` flex items-center gap-3 ${!isLast ? 'border-b md:border-b-0 lg:border-r' : ''} max-md:pb-5`}>
       <div className="bg-[#f3f2f2] p-3 rounded-full">
         {icon}
       </div>

@@ -7,6 +7,7 @@ import { VscOutput } from "react-icons/vsc"
 import StatusCard from "./status-card"
 import { Bar, Line, Pie } from "react-chartjs-2"
 import { ComplaintsByStatusChart, ComplaintsByTypeChart, TotalComplaintsChart } from "./line-chart"
+import RecentComplaints from "./recent-complaints"
 
 const statusConfig = [
     {
@@ -69,36 +70,40 @@ const statusConfig = [
 const DashboardMetrics = () => {
 
   return (
-    <div className="mt-16 border-y py-8 border-gray-100">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
-            {statusConfig.map((status, index) => (
-            <StatusCard 
-            key={index} 
-            {...status} 
-            isLast={index === statusConfig.length - 1}/>
-            ))}
-        </div>
+    <div className="mt-16">
+       <div className="border-y py-8 lg:py-12 border-gray-100">
+             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+                {statusConfig.map((status, index) => (
+                <StatusCard 
+                key={index} 
+                {...status} 
+                isLast={index === statusConfig.length - 1}/>
+                ))}
+            </div>
+       </div>
 
         <div className="mt-16 lg:mt-24">
-            <div className="dashboard-analytics mt-16 border-y py-8 border-gray-100">
+            <div className="dashboard-analytics mt-16">
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
                     <div className="chart-container lg:col-span-3">
-                    <h3>Total Complaints Submitted</h3>
+                    <h3 className="mb-2 font-semibold text-lg">Total Complaints Submitted</h3>
                     <TotalComplaintsChart data={dashboardData.totalComplaints} />
                     </div>
 
                     <div className="chart-container lg:col-span-1">
-                    <h3>Complaints by Type</h3>
+                    <h3 className="mb-2 font-semibold text-lg">Complaints by Type</h3>
                     <ComplaintsByTypeChart data={dashboardData.complaintsByType} />
                     </div>
 
                     <div className="chart-container lg:col-span-1">
-                    <h3>Complaints by Status</h3>
+                    <h3 className="mb-2 font-semibold text-lg">Complaints by Status</h3>
                     <ComplaintsByStatusChart data={dashboardData.complaintsByStatus} />
                     </div>
                 </div>
             </div>
         </div>
+
+        <RecentComplaints />
     </div>
   )
 }
