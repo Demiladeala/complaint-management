@@ -1,6 +1,12 @@
+import DashboardDetails from "../components/dashboard-details"
+import SideBar from "../components/side-bar"
+
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <main className="relative container w-full mx-auto max-w-[2800px]">
+        <SideBar/>
+        <DashboardDetails/>
+    </main>
   )
 }
 
