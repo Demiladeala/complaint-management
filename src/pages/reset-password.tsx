@@ -2,6 +2,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { RiLoader4Fill } from "react-icons/ri";
 
 const ResetPassword = () => {
     const location = useLocation();
@@ -9,6 +10,7 @@ const ResetPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [token, setToken] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -23,6 +25,7 @@ const ResetPassword = () => {
 
     const handlePasswordReset = async (e: FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
         if (password !== confirmPassword) {
             toast.error("Passwords do not match.");
             return;
@@ -43,11 +46,13 @@ const ResetPassword = () => {
             navigate("/login"); // Redirect to login after successful reset
         } catch (error) {
             toast.error("Failed to reset password. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="w-full h-screen overflow-y-auto bg-[#f4f4f4] flex justify-between md:items-center relative container max-w-[2800px]">
+        <div className="w-full h-screen overflow-y-auto bg-[#f4f4f4] flex justify-between items-center relative container max-w-[2800px]">
             <Toaster />
             <div className="z-[1] relative w-[90%] lg:w-[95%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
                 <div className="w-full basis-[50%] max-lg:hidden">
@@ -84,8 +89,12 @@ const ResetPassword = () => {
 
                             <button 
                                 type="submit" 
-                                className="mt-9 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded transition-colors duration-300 hover:bg-opacity-80">
-                                Reset Password
+                                className="mt-9 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center 
+                                rounded transition-colors duration-300 hover:bg-opacity-80">
+                                {isSubmitting ?
+                                <RiLoader4Fill size={20} className="text-white animate-spin" /> 
+                                :
+                                "Reset Password"}
                             </button>
                         </form>
                     </div>

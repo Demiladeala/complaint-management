@@ -1,20 +1,67 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NotificationModal from "../components/notification-modal";
+import toast from "react-hot-toast";
+import api from "../components/api";
+import { RiLoader4Fill } from "react-icons/ri";
+
 
 const ForgotPassword = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleForgotPassword = (event: FormEvent) => {
-    event.preventDefault();
-    setIsModalOpen(true);
-    // You can also add logic to trigger the actual forgot password API here
-  };
+  const validateEmail = (email: string) => {
+    // Simple email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
+const handleForgotPassword = async (event: FormEvent) => {
+  event.preventDefault();
+  setEmailError(null); // Reset error state
+
+  // Validate email
+  if (!email) {
+      setEmailError("Email is required.");
+      return;
+  }
+  if (!validateEmail(email)) {
+      setEmailError("Invalid email format.");
+      return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+      const response = await api.post('/auth/forgot-password', 
+          new URLSearchParams({ email }),
+      );
+
+      if (response.status === 202) {
+          setIsModalOpen(true);
+      } else {
+          // Handle unexpected responses
+          toast.error('Something went wrong. Please try again.');
+      }
+  } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+          toast.error('User not found.');
+      } else if (error.response && error.response.status === 422) {
+          toast.error('Validation error. Please check your input.');
+      } else {
+          toast.error('Failed to send reset link. Please try again.');
+      }
+  } finally {
+      setIsSubmitting(false);
+  }
+};
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate("/reset-password"); // Navigate to the reset password page
+    navigate("/forgot-password");
   };
 
   return (
@@ -34,16 +81,29 @@ const ForgotPassword = () => {
                     <form className="mt-4 text-primary-gray text-lg">
                         
                         <div className="mt-4">
-                            <label className="">Email</label>
-                            <input type="email"
-                            className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
+                          <label className="">Email</label>
+                          <input 
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className={`mt-1 outline-none w-full p-3 border rounded-lg 
+                          ${emailError ? "border-red-400" : "border-primary-gray"}`} />
+
+                          <div className="h-4">
+                            {emailError && <p className="text-red-500 mt-1">{emailError}</p>}
+                          </div>
                         </div>
 
                         <button 
+                        type="submit"
+                        disabled={isSubmitting}
                         onClick={handleForgotPassword}
-                        className="mt-8 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded
-                        transition-colors duration-300 hover:bg-opacity-80">
-                            Submit
+                        className={`mt-8 w-full py-3 text-white flex items-center justify-center rounded
+                        transition-colors duration-300 hover:bg-opacity-80 
+                        ${isSubmitting ? "bg-stone-300" : "bg-primary-aquablue"}`}>
+                            {isSubmitting ? 
+                            <RiLoader4Fill size={20} className="text-white animate-spin" /> 
+                            : "Submit"}
                         </button>
 
                     </form>
