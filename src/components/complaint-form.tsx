@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { IoImageOutline } from 'react-icons/io5';
+import { RiLoader4Fill } from 'react-icons/ri';
+import api from './api';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ComplaintForm = () => {
   const [complaintType, setComplaintType] = useState('');
   const [description, setDescription] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<{ url: string; name: string; type: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -23,18 +27,42 @@ const ComplaintForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-
-    console.log('Complaint Type:', complaintType);
-    console.log('Description:', description);
-    console.log('Files:', files);
+    setIsLoading(true);
+  
+    const formData = new FormData();
+    formData.append('type', complaintType);
+    formData.append('description', description);
+    files.forEach((file, index) => {
+      formData.append(`supporting_docs[${index}]`, file);
+    });
+  
+    try {
+      const response = await api.post('/complaints', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      toast.success('Complaint submitted successfully:');
+      // Reset the form after successful submission
+      setComplaintType('');
+      setDescription('');
+      setFiles([]);
+      setPreviews([]);
+    } catch (error) {
+      console.error('Error submitting complaint:', error);
+      toast.error('Failed to submit complaint. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className='h-full flex md:items-center justify-center'>
-      <div className="mt-5 w-full lg:w-[70%] h-fit bg-white px-5 md:px-8 py-6 box-shadow rounded-2xl">
+      <Toaster />
+      <div className="mt-12 lg:mt-5 w-full lg:w-[70%] h-fit bg-white px-5 md:px-8 py-6 box-shadow rounded-2xl">
         <h2 className="poppins text-xl lg:text-2xl font-semibold mb-6">Submit a Complaint</h2>
         <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-4">
@@ -123,9 +151,16 @@ const ComplaintForm = () => {
 
           <button
             type="submit"
-            className="px-4 py-2 bg-primary-500 text-white font-semibold rounded-md hover:bg-primary-600"
+            className="px-4 py-2 bg-primary-darkblue text-white font-semibold flex items-center justify-center text-center
+             rounded-md hover:bg-primary-600 disabled:bg-gray-400"
+            disabled={isLoading}
           >
-            Submit Complaint
+            {isLoading ? 
+            <div className='flex items-center gap-1'>
+              Submitting
+              <RiLoader4Fill size={20} className="text-white animate-spin" />
+            </div> : 
+            'Submit Complaint'}
           </button>
         </form>
       </div>

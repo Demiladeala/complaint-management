@@ -60,15 +60,22 @@ const Login = () => {
         navigate('/dashboard');
         
     }  catch (error: any) {
-      if (error.response && error.response.status === (400 || 404)) {
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400 || status === 404) {
           // Display the error message from the API response
-          const errorMessage = error.response.data.detail || 'Failed to Login. Please try again.';
+          const errorMessage = data.detail || 'An error occurred. Please try again.';
           toast.error(errorMessage);
-      } else {
+        } else {
           // Handle other errors
           toast.error('Failed to Login. Please try again.');
+        }
+      } else {
+        // Handle cases where there is no response from the server
+        toast.error('An unexpected error occurred. Please try again.');
       }
-    }finally {
+    }
+    finally {
       setIsSubmitting(false);
     }
   };

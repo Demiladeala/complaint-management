@@ -34,11 +34,15 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refresh_token');
-        const { data } = await axios.post(`${BASE_URL}/api/auth/token/refresh`, {}, {
-          headers: {
-            'Authorization': `Bearer ${refreshToken}`,
-          },
-        });
+        const { data } = await axios.post(
+          `${BASE_URL}/api/auth/token/refresh`,
+          {},
+          {
+            headers: {
+              'Authorization': `Bearer ${refreshToken}`
+            }
+          }
+        );      
 
         // Save new tokens
         localStorage.setItem('access_token', data.access_token);
@@ -60,7 +64,7 @@ api.interceptors.response.use(
     }
 
     // Show error message
-    toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
+    // toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
 
     return Promise.reject(error);
   }

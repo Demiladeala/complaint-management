@@ -5,7 +5,7 @@ import { RxDoubleArrowDown, RxDoubleArrowRight } from "react-icons/rx"
 import { TbMailPause } from "react-icons/tb"
 import { VscOutput } from "react-icons/vsc"
 import StatusCard from "./status-card"
-import { ComplaintsByStatusChart, ComplaintsByTypeChart, TotalComplaintsChart } from "./line-chart"
+import { ComplaintsByStatusChart, ComplaintsByTypeChart, TotalComplaintsChart } from "./charts"
 import RecentComplaints from "./recent-complaints"
 
 const statusConfig = [
