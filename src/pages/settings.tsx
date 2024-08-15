@@ -3,7 +3,7 @@ import SideBar from "../components/side-bar"
 
 const Settings = () => {
   return (
-    <main className="relative container w-full mx-auto max-w-[2800px]">
+    <main className="relative container w-full mx-auto max-w-[2800px] scroll-smooth">
         <SideBar/>
         <div className="w-full flex lg:justify-end">
             <div className="w-full lg:w-[84%] flex bg-white text-primary-darkblue h-screen overflow-y-auto">

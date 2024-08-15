@@ -3,7 +3,7 @@ import SideBar from "../components/side-bar"
 
 const Complaint = () => {
   return (
-    <main className="relative container w-full mx-auto max-w-[2800px] bg-[#f9f9f9]">
+    <main className="relative container w-full mx-auto max-w-[2800px] bg-[#f9f9f9] scroll-smooth">
         <SideBar/>
         <div className="w-full flex lg:justify-end">
             <div className="w-full lg:w-[84%] flex bg-white text-primary-darkblue h-screen pt-8 lg:pt-12 overflow-y-scroll">
