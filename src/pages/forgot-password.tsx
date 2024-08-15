@@ -18,10 +18,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="w-full md:h-screen bg-[#f4f4f4] flex justify-between md:items-center overflow-y-scroll relative container max-w-[2800px]">
+    <div className="w-full h-screen bg-[#f4f4f4] flex justify-between md:items-center overflow-y-auto relative container max-w-[2800px]">
         <div className="z-[1] relative w-[90%] lg:w-[95%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
             <div className="w-full basis-[50%] max-lg:hidden">
-                <img src="/signup.svg" alt="signup" />
+                <img src="/forgot-password.svg" alt="signup" />
             </div>
 
             <div className="w-full lg:h-[95%] lg:basis-[50%] bg-white py-4 pb-7 text-primary-darkblue rounded-md max-lg:mt-7">
