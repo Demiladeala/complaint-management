@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NotificationModal from "../components/notification-modal";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import api from "../components/api";
 import { RiLoader4Fill } from "react-icons/ri";
 
@@ -65,7 +65,8 @@ const handleForgotPassword = async (event: FormEvent) => {
   };
 
   return (
-    <div className="w-full h-screen bg-[#f4f4f4] flex justify-between md:items-center overflow-y-auto relative container max-w-[2800px]">
+    <div className="w-full h-screen bg-[#f4f4f4] flex justify-between items-center overflow-y-auto relative container max-w-[2800px]">
+        <Toaster />
         <div className="z-[1] relative w-[90%] lg:w-[95%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
             <div className="w-full basis-[50%] max-lg:hidden">
                 <img src="/forgot-password.svg" alt="signup" />
