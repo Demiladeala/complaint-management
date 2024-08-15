@@ -47,20 +47,28 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      const { data } = await api.post('/api/auth/token', {
+      const { data } = await api.post('/auth/token', {
         username: formData.email,
         password: formData.password,
       });
 
       // Save tokens to localStorage
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
 
-      toast.success("Login successful!");
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error("Failed to login. Please check your credentials and try again.");
-    } finally {
+        toast.success("Login successful!");
+        navigate('/dashboard');
+        
+    }  catch (error: any) {
+      if (error.response && error.response.status === (400 || 404)) {
+          // Display the error message from the API response
+          const errorMessage = error.response.data.detail || 'Failed to Login. Please try again.';
+          toast.error(errorMessage);
+      } else {
+          // Handle other errors
+          toast.error('Failed to Login. Please try again.');
+      }
+    }finally {
       setIsSubmitting(false);
     }
   };
