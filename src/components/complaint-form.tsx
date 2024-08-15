@@ -39,7 +39,7 @@ const ComplaintForm = () => {
     });
   
     try {
-      const response = await api.post('/complaints', formData, {
+      await api.post('/complaints', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

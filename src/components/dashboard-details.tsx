@@ -12,22 +12,22 @@ type User = {
     last_login: string;
 };
 
-type Complaint = {
-    type: string;
-    description: string;
-    supporting_docs: string[];
-    id: string;
-    user_id: string;
-    created_at: string;
-    status: string;
-    feedbacks: {
-        message: string;
-        id: string;
-        user_id: string;
-        complaint_id: string;
-        created_at: string;
-    }[];
-};
+// type Complaint = {
+//     type: string;
+//     description: string;
+//     supporting_docs: string[];
+//     id: string;
+//     user_id: string;
+//     created_at: string;
+//     status: string;
+//     feedbacks: {
+//         message: string;
+//         id: string;
+//         user_id: string;
+//         complaint_id: string;
+//         created_at: string;
+//     }[];
+// };
 
 const formatDate = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -36,7 +36,6 @@ const formatDate = (date: Date): string => {
 
 const DashboardDetails = () => {
     const [user, setUser] = useState<User | null>(null);
-    const [complaints, setComplaints] = useState<Complaint[]>([]);
     const today = formatDate(new Date());
 
     useEffect(() => {
@@ -51,9 +50,9 @@ const DashboardDetails = () => {
 
         const fetchComplaints = async () => {
             try {
-                const response = await api.get(`/complaints`, {
+               await api.get(`/complaints`, {
                 });
-                setComplaints(response.data.items);
+                // setComplaints(response.data.items);
             } catch (error) {
                 console.error("Error fetching complaints:", error);
             }

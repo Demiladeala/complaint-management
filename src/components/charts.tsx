@@ -30,7 +30,10 @@ export const ComplaintsByTypeChart: React.FC<{ data: any[] }> = ({ data }) => (
         label
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}
+          enableBackground={entry
+          
+          }/>
         ))}
       </Pie>
       <Tooltip />
