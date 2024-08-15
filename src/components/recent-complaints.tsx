@@ -33,16 +33,14 @@ const complaintsData:Complaint[] = [
 const RecentComplaints = ({page}: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('All');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
 
-  const filteredComplaints = complaintsData.filter(complaint => {
+  const filteredComplaints = complaintsData.filter((complaint) => {
     const matchesSearch = complaint.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = selectedStatus === 'All' || complaint.status === selectedStatus;
-    const matchesDateRange = (!startDate || new Date(complaint.date) >= new Date(startDate)) &&
-                              (!endDate || new Date(complaint.date) <= new Date(endDate));
+    const matchesDate = !selectedDate || complaint.date === selectedDate;
 
-    return matchesSearch && matchesStatus && matchesDateRange;
+    return matchesSearch && matchesStatus && matchesDate;
   });
 
   return (
@@ -57,34 +55,28 @@ const RecentComplaints = ({page}: Props) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="border px-4 py-2 rounded"
           />
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="border px-4 py-2 rounded"
-          >
-            <option value="All">All Statuses</option>
-            <option value="new">New</option>
-            <option value="pending">Pending</option>
-            <option value="resolved">Resolved</option>
-            <option value="paused">Paused</option>
-          </select>
-          <div className="flex items-center gap-1">
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+          <div className='flex items-center gap-5'>
+            <select
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
               className="border px-4 py-2 rounded"
-            />
-            <label className="text-sm">Start Date</label>
-          </div>
-          <div className="flex items-center gap-1">
+            >
+              <option value="All">All Statuses</option>
+              <option value="new">New</option>
+              <option value="pending">Pending</option>
+              <option value="resolved">Resolved</option>
+              <option value="paused">Paused</option>
+            </select>
+
+            <div className="flex items-center gap-1">
             <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="border px-4 py-2 rounded"
-            />
-            <label className="text-sm">End Date</label>
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="border px-4 py-2 rounded"
+                />
+                {/* <label className="text-sm">Date</label> */}
+            </div>
           </div>
         </div>
         <div className="overflow-x-auto w-full">

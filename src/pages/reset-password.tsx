@@ -1,4 +1,4 @@
-const Login = () => {
+const ResetPassword = () => {
     return (
       <div className="w-full md:h-screen bg-[#f4f4f4] flex justify-between md:items-center overflow-y-scroll relative container max-w-[2800px]">
           <div className="z-[1] relative w-[90%] lg:w-[95%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
@@ -11,39 +11,27 @@ const Login = () => {
                       <h3 className="poppins mt-10 md:mt-14 text-2xl md:text-3xl 2xl:text-4xl font-bold">DUNNI</h3>
                       <h4 className="mt-1 text-lg md:text-xl font-medium text-gray-500">Complaint Management System</h4>
   
-                      <p className="poppins mt-9 lg:mt-16 text-primary-gray">Login to your account!</p>
+                      <p className="poppins mt-9 lg:mt-16 text-primary-gray">Reset your password</p>
   
                       <form className="mt-4 text-primary-gray text-lg">
-                          
-                          <div className="mt-4">
-                              <label className="">Email</label>
-                              <input type="email"
-                              className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
-                          </div>
   
                           <div className="mt-4">
-                              <label className="">Password</label>
+                              <label className="">New Password</label>
+                              <input type="password"
+                              className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
+                          </div>
+
+                          <div className="mt-4">
+                              <label className="">Confirm Password</label>
                               <input type="password"
                               className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
                           </div>
   
-                          <div className="mt-2 w-full flex justify-end">
-                              <a href="/forgot-password">
-                              <p className="text-sm text-primary-aquablue"> Forgot Password?</p>
-                              </a>
-                          </div>
   
-                          <button className="mt-6 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded
+                          <button className="mt-9 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded
                           transition-colors duration-300 hover:bg-opacity-80">
-                              Login
+                              Reset Password
                           </button>
-  
-                          <div className="mt-3 w-full flex justify-center text-sm">
-                              Don't have an account?{""}
-                              <a href="/signup">
-                              <p className="text-sm text-primary-aquablue">&nbsp;Signup</p>
-                              </a>
-                          </div>
   
                       </form>
                   </div>
@@ -55,4 +43,4 @@ const Login = () => {
     )
   }
   
-  export default  Login
+  export default ResetPassword

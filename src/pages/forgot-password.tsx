@@ -1,12 +1,20 @@
 import { FormEvent, useState } from "react";
-import OtpModal from "../components/otp-modal";
+import { useNavigate } from "react-router-dom";
+import NotificationModal from "../components/notification-modal";
 
-const Signup = () => {
-    const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+const ForgotPassword = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSignup = (event: FormEvent) => {
+  const handleForgotPassword = (event: FormEvent) => {
     event.preventDefault();
-    setIsOtpModalOpen(true);
+    setIsModalOpen(true);
+    // You can also add logic to trigger the actual forgot password API here
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    navigate("/reset-password"); // Navigate to the reset password page
   };
 
   return (
@@ -21,14 +29,9 @@ const Signup = () => {
                     <h3 className="poppins mt-10 md:mt-14 text-2xl md:text-3xl 2xl:text-4xl font-bold">DUNNI</h3>
                     <h4 className="mt-1 text-lg md:text-xl font-medium text-gray-500">Complaint Management System</h4>
 
-                    <p className="poppins mt-9 lg:mt-16 text-primary-gray">Sign up to create an account!</p>
+                    <p className="poppins mt-9 lg:mt-16 text-primary-gray">Enter email to reset password</p>
 
                     <form className="mt-4 text-primary-gray text-lg">
-                        <div>
-                            <label className="">Username</label>
-                            <input type="text"
-                            className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
-                        </div>
                         
                         <div className="mt-4">
                             <label className="">Email</label>
@@ -36,25 +39,12 @@ const Signup = () => {
                             className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
                         </div>
 
-                        <div className="mt-4">
-                            <label className="">Password</label>
-                            <input type="password"
-                            className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg" />
-                        </div>
-
                         <button 
-                        onClick={handleSignup}
-                        className="mt-6 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded
+                        onClick={handleForgotPassword}
+                        className="mt-8 w-full py-3 bg-primary-aquablue text-white flex items-center justify-center rounded
                         transition-colors duration-300 hover:bg-opacity-80">
-                            Sign up
+                            Submit
                         </button>
-
-                        <div className="mt-3 w-full flex justify-center text-sm">
-                            Already have an account?{""}
-                            <a href="/login">
-                            <p className="text-sm text-primary-aquablue">&nbsp;Login</p>
-                            </a>
-                        </div>
 
                     </form>
                 </div>
@@ -62,9 +52,16 @@ const Signup = () => {
 
             <div className="max-lg:mt-4"></div>
         </div>
-        {isOtpModalOpen && <OtpModal onClose={() => setIsOtpModalOpen(false)} />}
+
+        {isModalOpen && (
+        <NotificationModal
+        image={true}
+          message="A link has been sent to your email for password reset. Please check your inbox and spam folder."
+          onClose={handleCloseModal}
+        />
+      )}
   </div>
   )
 }
 
-export default  Signup
+export default ForgotPassword
