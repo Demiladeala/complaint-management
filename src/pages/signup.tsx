@@ -157,7 +157,7 @@ const Signup = () => {
                         </button>
 
                         <div className="mt-3 w-full flex justify-center text-sm">
-                            Already have an account?{""}
+                            Already have an account? &nbsp;
                             <a href="/login">
                             <p className="text-sm text-primary-aquablue">&nbsp;Login</p>
                             </a>

@@ -141,7 +141,7 @@ const Login = () => {
               </button>
 
               <div className="mt-3 w-full flex justify-center text-sm">
-                Don't have an account?{" "}
+                Don't have an account? &nbsp;
                 <a href="/signup" className="text-primary-aquablue">
                   Signup
                 </a>
