@@ -15,7 +15,7 @@ const statusConfig = [
       icon: <VscOutput size={35} />,
       color: "text-[#FF5733]",
       arrow: <RxDoubleArrowDown />,
-      description: "Fresh issues"
+      description: "Fresh issus"
     },
     {
       title: "Pending",
