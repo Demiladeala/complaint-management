@@ -15,7 +15,7 @@ const Home = () => {
       <div className="z-[1] relative w-[90%] lg:w-[80%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
         <div className="w-full basis-[50%] max-lg:mt-32">
           <h1 className="text-4xl lg:text-5xl 2xl:text-6xl text-primary-darkblue font-bold">
-            Online Complaint Management
+            FUTA Public Complaint System
           </h1>
 
           <p className="mt-4 text-lg text-stone-600">Effortlessly submit complaints, track progress, and receive timely feedback. Our streamlined system

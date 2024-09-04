@@ -28,7 +28,11 @@ const SideBar = () => {
     {/* Hamburger Button for Mobile */}
     <div className="lg:hidden fixed top-0 left-0 w-full 
     flex items-center justify-between box-shadow p-2 bg-white z-50">
-        <h3 className="poppins text-xl md:text-2xl 2xl:text-3xl font-bold text-primary-darkblue">DUNNI</h3>
+       <div className="">
+            <h3 className="poppins text-lg font-bold">FUTA</h3>
+            <h4 className="font-medium text-gray-500">Public Complaint System</h4>
+       </div>
+
         <div className="lg:hidden mb-2 top-4 right-4 ">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-full bg-primary-darkblue text-white">
                 <span className="sr-only">Open menu</span>
@@ -49,8 +53,8 @@ const SideBar = () => {
                             </svg>
                             <span className="sr-only">Close menu</span>
                         </button>
-                        <h3 className="poppins mt-10 text-xl font-bold text-center">DUNNI</h3>
-                        <h4 className="mt-1 text-center font-medium text-gray-500">Complaint Management System</h4>
+                        <h3 className="poppins text-2xl md:text-3xl 2xl:text-4xl font-bold">FUTA</h3>
+                        <h4 className="mt-1 text-lg md:text-xl font-medium text-gray-500">Public Complaint System</h4>
                     </div>
                     <div className="mt-16 w-full text-sm font-medium">
                         {links.map((link, index) => (
@@ -77,8 +81,8 @@ const SideBar = () => {
 
             <div className="pt-12 lg:hidden"></div>
     <div className="z-[3] fixed max-lg:hidden w-[16%] h-screen bg-white border-r border-gray-100 text-primary-darkblue">
-        <h3 className="poppins mt-10 md:mt-14 text-xl md:text-2xl 2xl:text-3xl font-bold text-center">DUNNI</h3>
-        <h4 className="mt-1 text-center font-medium text-gray-500">Complaint Management System</h4>
+        <h3 className="poppins mt-10 md:mt-14 text-xl md:text-2xl 2xl:text-3xl font-bold text-center">FUTA</h3>
+        <h4 className="mt-1 text-center font-medium text-gray-500">Public Complaint System</h4>
 
         <div className="mt-16 w-[90%] mx-auto text-sm font-medium">
             {links.map((link, index) => (

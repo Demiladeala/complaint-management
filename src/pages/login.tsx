@@ -97,8 +97,8 @@ const Login = () => {
 
         <div className="w-full lg:h-[95%] lg:basis-[50%] bg-white py-4 pb-7 text-primary-darkblue rounded-md max-lg:mt-7">
           <div className="w-[95%] md:w-[90%] mx-auto px-2">
-            <h3 className="poppins mt-10 md:mt-14 text-2xl md:text-3xl 2xl:text-4xl font-bold">DUNNI</h3>
-            <h4 className="mt-1 text-lg md:text-xl font-medium text-gray-500">Complaint Management System</h4>
+            <h3 className="poppins mt-10 md:mt-14 text-2xl md:text-3xl 2xl:text-4xl font-bold">FUTA</h3>
+            <h4 className="mt-1 text-lg md:text-xl font-medium text-gray-500">Public Complaint System</h4>
 
             <p className="poppins mt-9 lg:mt-16 text-primary-gray">Login to your account!</p>
 
