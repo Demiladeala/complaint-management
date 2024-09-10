@@ -7,17 +7,20 @@ import api from "../components/api";
 type FormData = {
   email: string;
   password: string;
+  accountType: string; // New field for account type (student or staff)
 };
 
 type Errors = {
   email?: string;
   password?: string;
+  accountType?: string;
 };
 
 const Login = () => {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
+    accountType: "student", // Default to student
   });
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,6 +36,9 @@ const Login = () => {
     if (!formData.password) {
       errors.password = "Password is required.";
     }
+    if (!formData.accountType) {
+      errors.accountType = "Please select an account type.";
+    }
     return errors;
   };
 
@@ -47,40 +53,35 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      const { data } = await api.post('/auth/token', {
+      const { data } = await api.post('/api/auth/token', {
         username: formData.email,
         password: formData.password,
       });
 
       // Save tokens to localStorage
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
+      localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem('refresh_token', data.refresh_token);
 
-        toast.success("Login successful!");
-        navigate('/dashboard');
-        
-    }  catch (error: any) {
+      toast.success("Login successful!");
+      navigate('/dashboard');
+    } catch (error: any) {
       if (error.response) {
         const { status, data } = error.response;
         if (status === 400 || status === 404) {
-          // Display the error message from the API response
           const errorMessage = data.detail || 'An error occurred. Please try again.';
           toast.error(errorMessage);
         } else {
-          // Handle other errors
           toast.error('Failed to Login. Please try again.');
         }
       } else {
-        // Handle cases where there is no response from the server
         toast.error('An unexpected error occurred. Please try again.');
       }
-    }
-    finally {
+    } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -125,6 +126,20 @@ const Login = () => {
                   className={`mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg ${errors.password && 'border-red-500'}`}
                 />
                 {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+              </div>
+
+              <div className="mt-4">
+                <label>Account Type</label>
+                <select
+                  name="accountType"
+                  value={formData.accountType}
+                  onChange={handleChange}
+                  className="mt-1 outline-none w-full p-3 border border-primary-gray rounded-lg"
+                >
+                  <option value="student">Student</option>
+                  <option value="staff">Staff</option>
+                </select>
+                {errors.accountType && <p className="text-red-500 text-sm mt-1">{errors.accountType}</p>}
               </div>
 
               <div className="mt-2 w-full flex justify-end">
